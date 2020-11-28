@@ -19,6 +19,7 @@ import java.util.stream.Collectors;
 
 @Tag(name = "Tournament More Enrollment", description = "Tournament More Enrollment API")
 @RestController
+@CrossOrigin
 @RequestMapping("/api")
 public class TournamentMoreEnrollmentController {
     @Autowired

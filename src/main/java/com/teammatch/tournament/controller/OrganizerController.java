@@ -19,6 +19,7 @@ import java.util.stream.Collectors;
 
 @Tag(name = "Organizer", description = "Organizer API")
 @RestController
+@CrossOrigin
 @RequestMapping("/api")
 public class OrganizerController {
     @Autowired

@@ -19,6 +19,7 @@ import java.util.stream.Collectors;
 
 @Tag(name = "Professional Tournament", description = "Professional-Tournament API")
 @RestController
+@CrossOrigin
 @RequestMapping("/api")
 public class ProfessionalTournamentController {
     @Autowired

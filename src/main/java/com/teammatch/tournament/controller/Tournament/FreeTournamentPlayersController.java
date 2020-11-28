@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 @Tag(name = "Free Tournament", description = "Free Tournament API")
 @RestController
+@CrossOrigin
 @RequestMapping("/api")
 public class FreeTournamentPlayersController {
     @Autowired
