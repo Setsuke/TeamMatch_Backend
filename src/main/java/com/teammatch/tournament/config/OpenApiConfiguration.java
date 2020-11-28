@@ -14,7 +14,7 @@ public class OpenApiConfiguration {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/api/**")
-                        .allowedOrigins("https://teammatchtournament.herokuapp.com");
+                        .allowedOrigins("http://localhost:4200");
             }
         };
     }
