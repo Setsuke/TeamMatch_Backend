@@ -21,6 +21,7 @@ import java.util.stream.Collectors;
 
 @Tag(name = "Player", description = "Player API")
 @RestController
+@CrossOrigin
 @RequestMapping("/api")
 public class PlayerController {
 
