@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 
 @Tag(name = "Game", description = "Game API")
 @RestController
-
+@CrossOrigin
 @RequestMapping("/api")
 public class GameController {
     @Autowired
