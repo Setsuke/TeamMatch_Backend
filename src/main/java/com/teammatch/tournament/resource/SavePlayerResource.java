@@ -23,8 +23,6 @@ public class SavePlayerResource {
     @NotNull
     private String lastName;
 
-
-    @Lob
     private String description;
 
     @NotNull

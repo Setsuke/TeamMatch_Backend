@@ -19,9 +19,6 @@ public class Profile extends AuditModel{
     @NotNull
     private String lastName;
 
-
-
-    @Lob
     private String description;
 
     @NotNull

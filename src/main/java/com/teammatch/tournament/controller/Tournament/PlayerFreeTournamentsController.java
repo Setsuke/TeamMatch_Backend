@@ -35,13 +35,9 @@ public class PlayerFreeTournamentsController {
         return new PageImpl<>(resources, pageable, resources.size());
 
     }
-
-
-
     private FreeTournament convertToEntity(SaveFreeTournamentResource resource) {
         return mapper.map(resource, FreeTournament.class);
     }
-
     private FreeTournamentResource convertToResource(FreeTournament entity) {
         return mapper.map(entity, FreeTournamentResource.class);
     }

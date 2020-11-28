@@ -21,7 +21,6 @@ public class Tournament extends AuditModel {
     @Column(unique = true)
     private String name;
     @NotNull
-    @Lob
     private String description;
     @NotNull
     private String prize;

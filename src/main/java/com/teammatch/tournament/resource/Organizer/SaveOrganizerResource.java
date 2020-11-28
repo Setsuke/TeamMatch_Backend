@@ -25,7 +25,6 @@ public class SaveOrganizerResource {
     private String lastName;
 
 
-    @Lob
     private String description;
 
     @NotNull

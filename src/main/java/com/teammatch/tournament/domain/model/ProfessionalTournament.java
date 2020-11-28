@@ -10,11 +10,6 @@ import java.util.List;
 public class ProfessionalTournament extends Tournament {
 
 
-
-
-
-
-
     @ManyToMany(fetch = FetchType.LAZY,
             cascade = {CascadeType.PERSIST, CascadeType.MERGE},
             mappedBy = "professionalTournaments")
