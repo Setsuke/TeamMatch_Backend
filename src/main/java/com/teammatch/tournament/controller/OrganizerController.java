@@ -19,7 +19,6 @@ import java.util.stream.Collectors;
 
 
 @Tag(name = "Organizer", description = "Organizer API")
-@CrossOrigin
 @RestController
 @RequestMapping("/api")
 public class OrganizerController {
