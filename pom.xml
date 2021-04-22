@@ -15,7 +15,7 @@
     <description>Spring Boot Implementation of TeamMatch Server Side Software.</description>
 
     <properties>
-        <java.version>15</java.version>
+        <java.version>8</java.version>
     </properties>
 
     <dependencies>

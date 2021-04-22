@@ -47,6 +47,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(userDetailsService)
                 .passwordEncoder(passwordEncoder());
     }
+    private static final String[] AUTH_WHITELIST = {
+            // -- Swagger UI v2
+            "/v2/api-docs",
+            "/swagger-resources",
+            "/swagger-resources/**",
+            "/configuration/ui",
+            "/configuration/security",
+            "/swagger-ui.html",
+            "/webjars/**",
+            // -- Swagger UI v3 (OpenAPI)
+            "/v3/api-docs/**",
+            "/swagger-ui/**"
+            // other public endpoints of your API may be appended to this array
+    };
 
 
     @Override
@@ -54,7 +68,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         httpSecurity.csrf()
                 .disable()
                 .authorizeRequests()
-                .antMatchers("/api/*/*", "/api/*","/api/*/*/*","/api/*/*/*/*" )
+                .antMatchers("/tournament-api-docs/**","/swagger-ui/**","/swagger-config","/api/*/*", "/api/*","/api/*/*/*","/api/*/*/*/*" )
                 .permitAll()
                 .anyRequest()
                 .authenticated()
