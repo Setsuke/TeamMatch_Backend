@@ -36,4 +36,8 @@ public class GetPlayerStepDefinitionTest {
     {
         Assertions.assertEquals(expectPlayer.getFirstName(),actualPlayer.getFirstName());
     }
+
+    @When("someone visits the game details")
+    public void someoneVisitsTheGameDetails() {
+    }
 }
