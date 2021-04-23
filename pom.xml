@@ -165,7 +165,7 @@
                 <artifactId>maven-failsafe-plugin</artifactId>
                 <configuration>
                     <includes>
-                        <include>**/BBD/CucumberIntegrationTesting.java</include>
+                        <include>**/*IntegrationTest.java</include>
                     </includes>
                 </configuration>
                 <executions>
