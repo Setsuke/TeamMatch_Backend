@@ -1,4 +1,4 @@
-package com.teammatch.tournament.BBD;
+package com.teammatch.tournament.UnitTests;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.cucumber.java.DefaultDataTableCellTransformer;

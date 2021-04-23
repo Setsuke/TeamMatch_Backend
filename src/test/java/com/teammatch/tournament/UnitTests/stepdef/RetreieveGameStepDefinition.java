@@ -1,8 +1,7 @@
-package com.teammatch.tournament.BBD.stepdef;
+package com.teammatch.tournament.UnitTests.stepdef;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
-import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 
 public class RetreieveGameStepDefinition {
