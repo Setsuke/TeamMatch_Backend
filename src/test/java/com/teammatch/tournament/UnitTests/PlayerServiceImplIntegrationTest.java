@@ -1,13 +1,12 @@
-package com.teammatch.tournament;
+package com.teammatch.tournament.UnitTests;
 
 import com.teammatch.tournament.domain.model.Player;
-import com.teammatch.tournament.domain.model.Team;
 import com.teammatch.tournament.domain.repository.PlayerRepository;
-import com.teammatch.tournament.domain.service.TeamService;
+import com.teammatch.tournament.domain.service.PlayerService;
 import com.teammatch.tournament.exception.ResourceNotFoundException;
-import com.teammatch.tournament.service.TeamServiceImpl;
-import org.junit.jupiter.api.DisplayName;
+import com.teammatch.tournament.service.PlayerServiceImpl;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,43 +20,41 @@ import java.util.Optional;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
 
+
 @ExtendWith(SpringExtension.class)
-public class TeamServiceImplIntegrationTest extends TournamentApplicationTests{
+public class PlayerServiceImplIntegrationTest extends TournamentApplicationTests{
+
     @Autowired
-    private TeamService teamService;
+    private PlayerService playerService;
 
     @MockBean
     private PlayerRepository playerRepository;
 
     @TestConfiguration
-    static class TeamServiceImplTestConfiguration {
+    static class PlayerServiceImplConfiguration{
         @Bean
-        public TeamService teamService() {
-            return new TeamServiceImpl();
-        }
+        public PlayerService playerService(){ return new PlayerServiceImpl();}
     }
+
     @Test
-    @DisplayName("When assignTeamPlayer But Player Not Exists Return Player not found for Id with value 1")
-    public void  whenAssignTeamPlayerButPlayerNotExistsReturnPlayerNotFound() {
+    @DisplayName("When findById But Id Does Not Exists Return player not found for Id with value 1")
+    public void whenFindByIdButIdDoesNotExistsReturnPlayerNotFound(){
+        //Arrange
         String response = "Resource %s not found for %s with value %s";
         Player player = new Player();
         player.setId(1L).setFirstName("Diego").setLastName("Johnson");
 
-        Mockito.when(playerRepository.findById(player.getId()))
+        Mockito.when(playerRepository.findById(1L))
                 .thenReturn(Optional.empty());
-
         String expectedMessage = String.format(response, "Player","Id", player.getId());
         //Act
-        Team team = new Team();
-        team.setId(1L);
         Throwable exception = catchThrowable(()-> {
-            Team result = teamService.assignTeamPlayer(team.getId(),player.getId());
+            Player result = playerService.getPlayerById(1L);
         });
         //Assert
         assertThat(exception)
                 .isInstanceOf(ResourceNotFoundException.class)
                 .hasMessage(expectedMessage);
-
     }
 
 }

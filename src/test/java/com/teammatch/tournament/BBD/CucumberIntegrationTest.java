@@ -8,6 +8,6 @@ import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @CucumberContextConfiguration
-@CucumberOptions(plugin = {"pretty"}, tags = "", features = "src/test/resources/features", strict = false,glue = "com.teammatch.tournament.UnitTests")
+@CucumberOptions(plugin = {"pretty"}, tags = "", features = "src/test/resources/features", strict = false,glue = "com.teammatch.tournament")
 public class CucumberIntegrationTest {
 }
