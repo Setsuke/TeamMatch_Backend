@@ -4,16 +4,25 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public class PlayerLevelProgressStepDefinitionTest {
-    @Given("the player wants to get his level progress")
-    public void thePlayerWantsToGetHisLevelProgress() {
+    private int initial_level;
+    private int actual_level;
+
+    @Given("the player wants to get his {int} level progress")
+    public void thePlayerWantsToGetHisInitialLevelProgress(int initial_level) {
+        this.initial_level = initial_level;
+
     }
 
-    @When("someone visits his game details on his profile")
-    public void someoneVisitsHisGameDetailsOnHisProfile() {
+    @When("he gains more experience {int} in game")
+    public void heGainsMoreExperienceAddedInGame(int added) {
+        this.actual_level = this.initial_level + added;
     }
 
-    @Then("his level progress of the Game will be retrieved successfully")
-    public void hisLevelProgressOfTheGameWillBeRetrievedSuccessfully() {
+    @Then("his {int} progress of the Game will be retrieved successfully")
+    public void hisActualLevelProgressOfTheGameWillBeRetrievedSuccessfully(int actual_level) {
+        assertEquals(this.actual_level, actual_level);
     }
 }
