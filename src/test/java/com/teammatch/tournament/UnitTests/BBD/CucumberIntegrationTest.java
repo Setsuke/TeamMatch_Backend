@@ -1,4 +1,4 @@
-package com.teammatch.tournament.UnitTests;
+package com.teammatch.tournament.UnitTests.BBD;
 
 import com.teammatch.tournament.TournamentApplication;
 import io.cucumber.junit.Cucumber;
