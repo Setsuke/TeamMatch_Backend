@@ -1,4 +1,4 @@
-package BBD.stepdef;
+package com.teammatch.tournament.BBD.stepdef;
 
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;

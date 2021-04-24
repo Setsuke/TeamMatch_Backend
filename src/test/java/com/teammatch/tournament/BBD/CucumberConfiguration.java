@@ -1,4 +1,4 @@
-package BBD;
+package com.teammatch.tournament.BBD;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.cucumber.java.DefaultDataTableCellTransformer;

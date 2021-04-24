@@ -1,3 +1,5 @@
+package com.teammatch.tournament;
+
 import com.teammatch.tournament.TournamentApplication;
 import com.teammatch.tournament.domain.model.Tournament;
 import org.junit.jupiter.api.Test;

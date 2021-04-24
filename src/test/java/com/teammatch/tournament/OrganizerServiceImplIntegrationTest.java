@@ -1,3 +1,5 @@
+package com.teammatch.tournament;
+
 import com.teammatch.tournament.domain.model.Organizer;
 import com.teammatch.tournament.domain.repository.OrganizerRepository;
 import com.teammatch.tournament.domain.service.OrganizerService;

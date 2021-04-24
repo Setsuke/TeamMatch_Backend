@@ -1,4 +1,4 @@
-package BBD;
+package com.teammatch.tournament.BBD;
 
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
