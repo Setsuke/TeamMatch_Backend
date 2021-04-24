@@ -1,4 +1,4 @@
-package com.teammatch.tournament.UnitTests.BBD.stepdef;
+package BBD.stepdef;
 
 import com.teammatch.tournament.domain.model.Team;
 import io.cucumber.java.en.Given;

@@ -1,20 +1,14 @@
-package com.teammatch.tournament.UnitTests;
-
-import com.teammatch.tournament.TournamentApplication;
 import com.teammatch.tournament.domain.model.Player;
 import com.teammatch.tournament.domain.model.Team;
 import com.teammatch.tournament.domain.repository.PlayerRepository;
-import com.teammatch.tournament.domain.service.PlayerService;
 import com.teammatch.tournament.domain.service.TeamService;
 import com.teammatch.tournament.exception.ResourceNotFoundException;
 import com.teammatch.tournament.service.TeamServiceImpl;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Bean;
