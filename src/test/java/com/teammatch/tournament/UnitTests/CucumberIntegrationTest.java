@@ -15,6 +15,6 @@ import static io.cucumber.spring.CucumberTestContext.SCOPE_CUCUMBER_GLUE;
 
 @RunWith(Cucumber.class)
 @CucumberContextConfiguration
-@CucumberOptions(plugin = {"pretty"}, tags = "", features = "src/test/resources/features", strict = true)
+@CucumberOptions(plugin = {"pretty"}, tags = "", features = "src/test/resources/features", strict = false,glue = "com.teammatch.tournament.UnitTests")
 public class CucumberIntegrationTest {
 }
