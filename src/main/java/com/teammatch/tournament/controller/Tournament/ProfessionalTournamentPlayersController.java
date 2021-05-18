@@ -30,14 +30,14 @@ public class ProfessionalTournamentPlayersController {
     @Autowired
     private PlayerService playerService;
 
-    @PostMapping("/professionalTournaments/{professionalTournamentId}/players/{playerId}")
+    @PostMapping("/professional-tournaments/{professionalTournamentId}/players/{playerId}")
     public ProfessionalTournamentResource assignProfessionalTournamentPlayer(
             @PathVariable(name = "professionalTournamentId") Long professionalTournamentId,
             @PathVariable(name = "playerId") Long playerId) {
         return convertToResource(professionalTournamentService.assignProfessionalTournamentPlayer(professionalTournamentId, playerId));
     }
 
-    @DeleteMapping("/professionalTournaments/{professionalTournamentId}/players/{playerId}")
+    @DeleteMapping("/professional-tournaments/{professionalTournamentId}/players/{playerId}")
     public ProfessionalTournamentResource unassignFreeTournamentPlayer(
             @PathVariable(name = "professionalTournamentId") Long professionalTournamentId,
             @PathVariable(name = "playerId") Long playerId) {
@@ -45,7 +45,7 @@ public class ProfessionalTournamentPlayersController {
     }
 
 
-    @GetMapping("/professionalTournaments/{professionalTournamentId}/players")
+    @GetMapping("/professional-tournaments/{professionalTournamentId}/players")
     public Page<PlayerResource> getAllPlayersByProfessionalTournamentId(
             @PathVariable(name = "professionalTournamentId") Long professionalTournamentId,
             Pageable pageable) {
