@@ -25,7 +25,7 @@ public class PlayerProfessionalTournamentsController {
     @Autowired
     private ProfessionalTournamentService professionalTournamentService;
 
-    @GetMapping("/player/{playerId}/professionalTournaments")
+    @GetMapping("/player/{playerId}/professional-tournaments")
     public Page<ProfessionalTournamentResource> getAllProfessionalTournamentsByPlayerId(
             @PathVariable(name = "playerId") Long playerId,
             Pageable pageable) {

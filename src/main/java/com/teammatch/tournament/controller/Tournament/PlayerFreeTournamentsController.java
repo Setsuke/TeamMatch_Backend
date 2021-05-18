@@ -24,7 +24,7 @@ public class PlayerFreeTournamentsController {
     @Autowired
     private FreeTournamentService freeTournamentService;
 
-    @GetMapping("/player/{playerId}/freeTournaments")
+    @GetMapping("/players/{playerId}/free-Tournaments")
     public Page<FreeTournamentResource> getAllFreeTournamentsByPlayerId(
             @PathVariable(name = "playerId") Long playerId,
             Pageable pageable) {

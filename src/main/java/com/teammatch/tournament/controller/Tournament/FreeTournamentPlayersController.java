@@ -31,14 +31,14 @@ public class FreeTournamentPlayersController {
     @Autowired
     private PlayerService playerService;
 
-    @PostMapping("/freeTournaments/{freeTournamentId}/players/{playerId}")
+    @PostMapping("/free-tournaments/{freeTournamentId}/players/{playerId}")
     public FreeTournamentResource assignFreeTournamentPlayer(
             @PathVariable(name = "freeTournamentId") Long freeTournamentId,
             @PathVariable(name = "playerId") Long playerId) {
         return convertToResource(freeTournamentService.assignFreeTournamentPlayer(freeTournamentId, playerId));
     }
 
-    @DeleteMapping("/freeTournaments/{freeTournamentId}/players/{playerId}")
+    @DeleteMapping("/free-tournaments/{freeTournamentId}/players/{playerId}")
     public FreeTournamentResource unassignFreeTournamentPlayer(
             @PathVariable(name = "freeTournamentId") Long freeTournamentId,
             @PathVariable(name = "playerId") Long playerId) {
@@ -46,7 +46,7 @@ public class FreeTournamentPlayersController {
     }
 
 
-    @GetMapping("/freeTournaments/{freeTournamentId}/players")
+    @GetMapping("/free-tournaments/{freeTournamentId}/players")
     public Page<PlayerResource> getAllPlayersByFreeTournamentId(
             @PathVariable(name = "freeTournamentId") Long freeTournamentId,
             Pageable pageable) {
