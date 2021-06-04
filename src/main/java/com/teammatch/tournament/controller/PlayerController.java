@@ -1,8 +1,6 @@
 package com.teammatch.tournament.controller;
 
-import com.teammatch.tournament.domain.model.FreeTournament;
 import com.teammatch.tournament.domain.model.Player;
-import com.teammatch.tournament.domain.model.Sponsor;
 import com.teammatch.tournament.domain.service.PlayerService;
 import com.teammatch.tournament.resource.*;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -16,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 @Tag(name = "Player", description = "Player API")

@@ -46,25 +46,11 @@ public class Player extends Profile{
     @JsonIgnore
     private List<Filter> filters;
 
-
     @ManyToMany(fetch = FetchType.LAZY,
-            cascade = {CascadeType.PERSIST, CascadeType.MERGE},
-            mappedBy = "players")
+    cascade = {CascadeType.PERSIST, CascadeType.MERGE},
+    mappedBy = "players")
     @JsonIgnore
-    private List<FreeTournament> freeTournaments;
-
-
-    @ManyToMany(fetch = FetchType.LAZY,
-            cascade = {CascadeType.PERSIST, CascadeType.MERGE},
-            mappedBy = "players")
-    @JsonIgnore
-    private List<ProfessionalTournament> ProfessionalTournaments;
-
-    @ManyToMany(fetch = FetchType.LAZY,
-            cascade = {CascadeType.PERSIST, CascadeType.MERGE},
-            mappedBy = "players")
-    @JsonIgnore
-    private List<TournamentMoreEnrollment> tournamentMoreEnrollments;
+    private List<Tournament> tournaments;
 
     public Player() {
     }
@@ -114,10 +100,6 @@ public class Player extends Profile{
         return this;
     }
 
-
-
-
-
     public List<Chat> getChats() {
         return chats;
     }
@@ -152,34 +134,14 @@ public class Player extends Profile{
         return this;
     }
 
-    public List<FreeTournament> getFreeTournaments() {
-        return freeTournaments;
+    public List<Tournament> getTournaments() {
+        return tournaments;
     }
 
-    public Player setFreeTournaments(List<FreeTournament> freeTournaments) {
-        this.freeTournaments = freeTournaments;
+    public Player setTournaments(List<Tournament> tournaments) {
+        this.tournaments = tournaments;
         return this;
     }
-
-    public List<ProfessionalTournament> getProfessionalTournaments() {
-        return ProfessionalTournaments;
-    }
-
-    public Player setProfessionalTournaments(List<ProfessionalTournament> professionalTournaments) {
-        ProfessionalTournaments = professionalTournaments;
-        return this;
-    }
-
-    public List<TournamentMoreEnrollment> getTournamentMoreEnrollments() {
-        return tournamentMoreEnrollments;
-    }
-
-    public Player setTournamentMoreEnrollments(List<TournamentMoreEnrollment> tournamentMoreEnrollments) {
-        this.tournamentMoreEnrollments = tournamentMoreEnrollments;
-        return this;
-    }
-
-
 
     public String getPassword() {
         return password;
