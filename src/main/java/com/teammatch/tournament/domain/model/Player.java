@@ -47,8 +47,7 @@ public class Player extends Profile{
     private List<Filter> filters;
 
     @ManyToMany(fetch = FetchType.LAZY,
-    cascade = {CascadeType.PERSIST, CascadeType.MERGE},
-    mappedBy = "players")
+    cascade = {CascadeType.PERSIST, CascadeType.MERGE},mappedBy = "players")
     @JsonIgnore
     private List<Tournament> tournaments;
 

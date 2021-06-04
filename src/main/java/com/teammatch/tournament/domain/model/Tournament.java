@@ -9,6 +9,8 @@ import javax.validation.constraints.NotNull;
 import java.sql.Date;
 import java.util.List;
 
+@Entity
+@Table(name="tournaments")
 public class Tournament extends AuditModel {
 
 
