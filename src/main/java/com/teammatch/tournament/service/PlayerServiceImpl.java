@@ -3,9 +3,6 @@ package com.teammatch.tournament.service;
 import com.teammatch.tournament.domain.model.Chat;
 import com.teammatch.tournament.domain.model.Player;
 import com.teammatch.tournament.domain.repository.*;
-import com.teammatch.tournament.domain.repository.Tournament.FreeTournamentRepository;
-import com.teammatch.tournament.domain.repository.Tournament.ProfessionalTournamentRepository;
-import com.teammatch.tournament.domain.repository.Tournament.TournamentMoreEnrollmentRepository;
 import com.teammatch.tournament.domain.service.PlayerService;
 import com.teammatch.tournament.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,11 +27,7 @@ public class PlayerServiceImpl implements PlayerService {
     private ChatRepository chatRepository;
 
     @Autowired
-    private FreeTournamentRepository freeTournamentRepository;
-    @Autowired
-    private ProfessionalTournamentRepository professionalTournamentRepository;
-    @Autowired
-    private TournamentMoreEnrollmentRepository tournamentMoreEnrollmentRepository;
+    private TournamentRepository tournamentRepository;
 
 
     @Override
@@ -133,26 +126,10 @@ public class PlayerServiceImpl implements PlayerService {
     }
 
     @Override
-    public Page<Player> getAllPlayersByFreeTournamentId(Long freeTournamentId, Pageable pageable) {
-        return freeTournamentRepository.findById(freeTournamentId).map( freeTournament -> {
-            List<Player> players = freeTournament.getPlayers();
+    public Page<Player> getAllPlayersByTournamentId(Long tournamentId, Pageable pageable) {
+        return tournamentRepository.findById(tournamentId).map( tournament -> {
+            List<Player> players = tournament.getPlayers();
             return new PageImpl<>(players, pageable, players.size());
-        }).orElseThrow(() -> new ResourceNotFoundException( "FreeTournament", "Id", freeTournamentId));
-    }
-
-    @Override
-    public Page<Player> getAllPlayersByProfessionalTournamentId(Long professionalTournamentId, Pageable pageable) {
-        return professionalTournamentRepository.findById(professionalTournamentId).map(professionalTournament -> {
-            List<Player> players = professionalTournament.getPlayers();
-            return new PageImpl<>(players, pageable, players.size());
-        }).orElseThrow(() -> new ResourceNotFoundException( "ProfessionalTournament", "Id", professionalTournamentId));
-    }
-
-    @Override
-    public Page<Player> getAllPlayersByTournamentMoreEnrollmentId(Long tournamentMoreEnrollmentId, Pageable pageable) {
-        return tournamentMoreEnrollmentRepository.findById(tournamentMoreEnrollmentId).map(tournamentMoreEnrollment -> {
-            List<Player> players = tournamentMoreEnrollment.getPlayers();
-            return new PageImpl<>(players, pageable, players.size());
-        }).orElseThrow(() -> new ResourceNotFoundException( "TournamentMoreEnrollment", "Id", tournamentMoreEnrollmentId));
+        }).orElseThrow(() -> new ResourceNotFoundException( "Tournament", "Id", tournamentId));
     }
 }

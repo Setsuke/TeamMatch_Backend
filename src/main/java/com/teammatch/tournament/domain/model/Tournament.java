@@ -8,7 +8,6 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.sql.Date;
 import java.util.List;
-@MappedSuperclass
 
 public class Tournament extends AuditModel {
 
@@ -23,20 +22,99 @@ public class Tournament extends AuditModel {
     @NotNull
     private String description;
     @NotNull
-    private String prize;
-
+    private Double prize;
+    @NotNull
     private Boolean publicTournament;
     @NotNull
-    private String code;
-
     private Date dateOfTournament;
     @NotNull
     private Integer maxTeams;
 
+    //RelationShip Player
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(name = "player_tournaments", joinColumns = {@JoinColumn(name = "player_id")},
+            inverseJoinColumns = {@JoinColumn(name="tournament_id")})
+    @JsonIgnore
+    private List<Player> players;
+
+    public boolean isInPlayer(Player player){       // Business methods
+        return (this.getPlayers().contains(player));
+    }
+
+    public Tournament addToPlayer(Player player) {
+        if(!this.isInPlayer(player)) {
+            this.getPlayers().add(player);
+        }
+        return this;
+    }
+
+    public Tournament deleteFromPlayer(Player player) {
+        if(this.isInPlayer(player)) {
+            this.getPlayers().remove(player);
+        }
+        return this;
+    }
+
+    public List<Player> getPlayers() {
+        return players;
+    }
+
+    public Tournament setPlayers(List<Player> players) {
+        this.players = players;
+        return this;
+    }
+
+    //RelationShip Team
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(name = "tournament_teams", joinColumns = {@JoinColumn(name = "tournament_id")}, inverseJoinColumns = {@JoinColumn(name="team_id")})
+    @JsonIgnore
+    private List<Team> teams;
+
+    public boolean isInTeam(Team team){       // Business methods
+        return (this.getTeams().contains(team));
+    }
+
+    public Tournament addToTeam(Team team) {
+        if(!this.isInTeam(team)) {
+            this.getTeams().add(team);
+        }
+        return this;
+    }
+
+    public Tournament deleteFromTeam(Team team) {
+        if(this.isInTeam(team)) {
+            this.getTeams().remove(team);
+        }
+        return this;
+    }
+
+    public List<Team> getTeams() {
+        return teams;
+    }
+    public Tournament setTeams(List<Player> players) {
+        this.players = players;
+        return this;
+    }
 
 
 
+    //RelationShip Sponsor
+    @ManyToMany(fetch = FetchType.LAZY,
+    cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(name = "tournament_sponsor",
+    joinColumns = {@JoinColumn(name = "tournament_id")},
+    inverseJoinColumns = {@JoinColumn(name = "sponsor_id")})
+    @JsonIgnore
+    private List<Sponsor> sponsors;
 
+    public List<Sponsor> getSponsors() {
+        return sponsors;
+    }
+
+    public Tournament setSponsors(List<Sponsor> sponsors) {
+        this.sponsors = sponsors;
+        return this;
+    }
 
 
 
@@ -100,11 +178,11 @@ public class Tournament extends AuditModel {
         return this;
     }
 
-    public String getPrize() {
+    public Double getPrize() {
         return prize;
     }
 
-    public Tournament setPrize(String prize) {
+    public Tournament setPrize(Double prize) {
         this.prize = prize;
         return this;
     }
@@ -118,14 +196,6 @@ public class Tournament extends AuditModel {
         return this;
     }
 
-    public String getCode() {
-        return code;
-    }
-
-    public Tournament setCode(String code) {
-        this.code = code;
-        return this;
-    }
 
     public Date getDateOfTournament() {
         return dateOfTournament;

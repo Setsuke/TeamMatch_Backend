@@ -1,6 +1,7 @@
 package com.teammatch.tournament.domain.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -22,27 +23,25 @@ public class Sponsor extends AuditModel {
     private String url;
 
     @ManyToMany(fetch = FetchType.LAZY,
-            cascade = { CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinTable(name = "sponsor_professional_tournaments",
-            joinColumns = {@JoinColumn(name = "sponsor_id")},
-            inverseJoinColumns = {@JoinColumn(name = "professional_tournament_id")})
+            cascade = {CascadeType.PERSIST, CascadeType.MERGE},
+            mappedBy = "sponsors")
     @JsonIgnore
-    private List<ProfessionalTournament> professionalTournaments;
+    private List<Tournament> tournaments;
 
-    public boolean hasProfessionalTournamentWith(ProfessionalTournament  professionalTournament) {
-        return (this.getProfessionalTournaments().contains(professionalTournament));
+    public boolean hasTournamentWith(Tournament  Tournament) {
+        return (this.getTournaments().contains(Tournament));
     }
 
-    public Sponsor professionalTournamentWith(ProfessionalTournament professionalTournament) {
-        if(!this.hasProfessionalTournamentWith(professionalTournament)) {
-            this.getProfessionalTournaments().add(professionalTournament);
+    public Sponsor tournamentWith(Tournament tournament) {
+        if(!this.hasTournamentWith(tournament)) {
+            this.getTournaments().add(tournament);
         }
         return this;
     }
 
-    public Sponsor unProfessionalTournamentWith(ProfessionalTournament professionalTournament) {
-        if(this.hasProfessionalTournamentWith(professionalTournament)) {
-            this.getProfessionalTournaments().remove(professionalTournament);
+    public Sponsor unTournamentWith(Tournament tournament) {
+        if(this.hasTournamentWith(tournament)) {
+            this.getTournaments().remove(tournament);
         }
         return this;
     }
@@ -75,12 +74,14 @@ public class Sponsor extends AuditModel {
     }
 
 
-    public List<ProfessionalTournament> getProfessionalTournaments() {
-        return professionalTournaments;
+
+
+    public List<Tournament> getTournaments() {
+        return tournaments;
     }
 
-    public Sponsor setProfessionalTournaments(List<ProfessionalTournament> professionalTournaments) {
-        this.professionalTournaments = professionalTournaments;
+    public Sponsor setTournaments(List<Tournament> tournaments) {
+        this.tournaments = tournaments;
         return this;
     }
 
