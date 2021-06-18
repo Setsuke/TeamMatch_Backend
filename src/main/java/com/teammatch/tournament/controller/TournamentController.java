@@ -19,7 +19,7 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Tag(name = "Tournament", description = "Tournament API")
+@Tag(name = "Tournamentt", description = "Tournament API")
 @RestController
 @CrossOrigin
 @RequestMapping("/api")
