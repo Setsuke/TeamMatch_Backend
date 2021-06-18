@@ -1,11 +1,10 @@
 package com.teammatch.tournament.UnitTests;
 
-import com.teammatch.tournament.domain.model.Player;
-import com.teammatch.tournament.domain.model.Team;
-import com.teammatch.tournament.domain.repository.PlayerRepository;
-import com.teammatch.tournament.domain.service.TeamService;
+import com.teammatch.tournament.domain.model.Game;
+import com.teammatch.tournament.domain.repository.GameRepository;
+import com.teammatch.tournament.domain.service.GameService;
 import com.teammatch.tournament.exception.ResourceNotFoundException;
-import com.teammatch.tournament.service.TeamServiceImpl;
+import com.teammatch.tournament.service.GameServiceImpl;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -22,42 +21,37 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
 
 @ExtendWith(SpringExtension.class)
-public class TeamServiceImplIntegrationTest extends TournamentApplicationTests{
+public class GameServiceImpIntegrationTest extends TournamentApplicationTests{
     @Autowired
-    private TeamService teamService;
+    private GameService gameService;
 
     @MockBean
-    private PlayerRepository playerRepository;
+    private GameRepository gameRepository;
 
     @TestConfiguration
-    static class TeamServiceImplTestConfiguration {
+    static class GameServiceImplConfiguration {
         @Bean
-        public TeamService teamService() {
-            return new TeamServiceImpl();
-        }
+        public GameService gameService(){ return new GameServiceImpl();}
     }
+
     @Test
-    @DisplayName("When assignTeamPlayer But Player Not Exists Return Player not found for Id with value 1")
-    public void  whenAssignTeamPlayerButPlayerNotExistsReturnPlayerNotFound() {
+    @DisplayName("When findById But Id Does Not Exists Return player not found for Id with value 1")
+    public void whenFindByIdButIdDoesNotExistsReturnGameNotFound(){
+        //Arrange
         String response = "Resource %s not found for %s with value %s";
-        Player player = new Player();
-        player.setId(1L).setFirstName("Diego").setLastName("Johnson");
+        Game game = new Game();
+        game.setId(1L).setName("CallofDuty").setPlatform("PC");
 
-        Mockito.when(playerRepository.findById(player.getId()))
+        Mockito.when(gameRepository.findById(1L))
                 .thenReturn(Optional.empty());
-
-        String expectedMessage = String.format(response, "Player","Id", player.getId());
+        String expectedMessage = String.format(response, "Game","Id", game.getId());
         //Act
-        Team team = new Team();
-        team.setId(1L);
         Throwable exception = catchThrowable(()-> {
-            Team result = teamService.assignTeamPlayer(team.getId(),player.getId());
+            Game result = gameService.getGameById(1L);
         });
         //Assert
         assertThat(exception)
                 .isInstanceOf(ResourceNotFoundException.class)
                 .hasMessage(expectedMessage);
-
     }
-
 }

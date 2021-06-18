@@ -1,9 +1,9 @@
 package com.teammatch.tournament.service;
 
-import com.teammatch.tournament.domain.model.ProfessionalTournament;
 import com.teammatch.tournament.domain.model.Sponsor;
-import com.teammatch.tournament.domain.repository.Tournament.ProfessionalTournamentRepository;
+import com.teammatch.tournament.domain.model.Tournament;
 import com.teammatch.tournament.domain.repository.SponsorRepository;
+import com.teammatch.tournament.domain.repository.TournamentRepository;
 import com.teammatch.tournament.domain.service.SponsorService;
 import com.teammatch.tournament.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +23,7 @@ public class SponsorServiceImpl implements SponsorService {
     private SponsorRepository sponsorRepository;
 
     @Autowired
-    private ProfessionalTournamentRepository professionalTournamentRepository;
+    private TournamentRepository tournamentRepository;
 
     @Override
     public Page<Sponsor> getAllSponsors(Pageable pageable) {
@@ -63,11 +63,11 @@ public class SponsorServiceImpl implements SponsorService {
 
     @Override
     public Sponsor assignSponsorProfessionalTournament(Long sponsorId, Long professionalTournamentId) {
-        ProfessionalTournament professionalTournament = professionalTournamentRepository.findById(professionalTournamentId)
+        Tournament professionalTournament = tournamentRepository.findById(professionalTournamentId)
                 .orElseThrow(() -> new ResourceNotFoundException(
                         "Tournament", "Id", professionalTournamentId));
         return sponsorRepository.findById(sponsorId).map(sponsor -> {
-            return sponsorRepository.save(sponsor.professionalTournamentWith(professionalTournament));
+            return sponsorRepository.save(sponsor.tournamentWith(professionalTournament));
         }).orElseThrow(() -> new ResourceNotFoundException(
                 "Sponsor", "Id", sponsorId));
 
@@ -75,18 +75,18 @@ public class SponsorServiceImpl implements SponsorService {
 
     @Override
     public Sponsor unassignSponsorProfessionalTournament(Long sponsorId, Long professionalTournamentId) {
-       ProfessionalTournament professionalTournament = professionalTournamentRepository.findById(professionalTournamentId)
+       Tournament professionalTournament = tournamentRepository.findById(professionalTournamentId)
                 .orElseThrow(() -> new ResourceNotFoundException(
                         "Tournament", "Id", professionalTournamentId));
         return sponsorRepository.findById(sponsorId).map(sponsor -> {
-            return sponsorRepository.save(sponsor.unProfessionalTournamentWith(professionalTournament));
+            return sponsorRepository.save(sponsor.unTournamentWith(professionalTournament));
         }).orElseThrow(() -> new ResourceNotFoundException(
                 "Sponsor", "Id", sponsorId));
     }
 
     @Override
     public Page<Sponsor> getAllSponsorsByProfessionalTournamentId(Long professionalTournamentId, Pageable pageable) {
-        return professionalTournamentRepository.findById(professionalTournamentId).map(professionalTournament -> {
+        return tournamentRepository.findById(professionalTournamentId).map(professionalTournament -> {
             List<Sponsor> sponsors = professionalTournament.getSponsors();
             int sponsorsCount = sponsors.size();
             return new PageImpl<>(sponsors, pageable, sponsorsCount);
