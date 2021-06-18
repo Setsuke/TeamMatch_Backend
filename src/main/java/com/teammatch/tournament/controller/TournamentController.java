@@ -39,6 +39,17 @@ public class TournamentController {
         return new PageImpl<>(resources, pageable, resources.size());
     }
 
+    @GetMapping("/tournaments")
+    public Page<TournamentResource> getAllTournaments( Pageable pageable){
+        Page<Tournament> tournamentsPage= tournamentService.getAllTournaments(pageable);
+        List<TournamentResource> resources = tournamentsPage.getContent()
+                .stream().map(this::convertToResource)
+                .collect(Collectors.toList());
+        return new PageImpl<>(resources, pageable, resources.size());
+    }
+
+
+
     @GetMapping("/organizers/{organizerId}/tournaments/{tournamentId}")
     public TournamentResource getTournamentByIdAndOrganizerId(@PathVariable(value = "organizerId") Long organizerId, @PathVariable (value = "tournamentId") Long tournamentId){
         return convertToResource(tournamentService.getTournamentByIdAndOrganizerId(organizerId, tournamentId));
